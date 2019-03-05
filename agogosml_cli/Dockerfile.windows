@@ -1,0 +1,33 @@
+ARG PYTHON_VERSION=3.7-windowsservercore-1803
+
+FROM python:${PYTHON_VERSION} as builder
+
+RUN pip install pytest tox
+RUN pip install tox-globinterpreter
+
+COPY requirements-dev.txt .
+RUN pip install --no-cache-dir -r requirements-dev.txt
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+RUN make clean && \
+    make lint && \
+    make test && \
+    make test-single && \
+    make docs && \
+    make dist
+
+FROM python:${PYTHON_VERSION}
+ENV PYTHONUNBUFFERED=1
+
+COPY --from=builder /usr/src/agogosml_cli/dist /dist
+
+# G++ is a runtime dependency if you want to be able to use this docker container
+RUN pip install --no-cache-dir /dist/agogosml_cli-*.tar.gz
+
+# WORKDIR /home
+
+ENTRYPOINT ["agogosml"]

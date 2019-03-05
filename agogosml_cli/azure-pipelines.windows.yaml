@@ -5,3 +5,18 @@ trigger:
   paths:
     include:
     - '**/agogosml_cli'
+
+
+jobs:
+- job: windowsbuild
+  displayName: Windows build on Python Image
+
+
+  steps:
+  - powershell: |
+      docker build -t agogosml_cli:latest-windows .)
+    workingDirectory: ./agogosml_cli
+
+
+    
+      

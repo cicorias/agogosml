@@ -13,12 +13,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN make clean && \
-    make lint && \
-    make test && \
-    make test-single && \
-    make docs && \
-    make dist
+RUN make clean
+    # make lint `
+    # make test `
+    # make test-single && \
+    # make docs && \
+    # make dist
 
 FROM python:${PYTHON_VERSION}
 ENV PYTHONUNBUFFERED=1

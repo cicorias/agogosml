@@ -2,10 +2,6 @@ trigger:
   branches:
     include:
     - matrix-build
-  paths:
-    include:
-    - '**/agogosml_cli'
-
 
 jobs:
 - job: windowsbuild

@@ -14,7 +14,7 @@ jobs:
 
   steps:
   - powershell: |
-      docker build -t agogosml_cli:latest-windows .)
+      docker build -t agogosml_cli:latest-windows .
     workingDirectory: ./agogosml_cli
 
 

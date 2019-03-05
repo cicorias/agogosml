@@ -3,12 +3,20 @@ ARG PYTHON_VERSION=3.7-windowsservercore-1803
 FROM python:${PYTHON_VERSION} as builder
 
 
-ENV chocolateyUseWindowsCompression false
-RUN powershell -Command \
-    iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')); \
-    choco feature disable --name showDownloadProgress
+# ENV chocolateyUseWindowsCompression false
+# RUN powershell -Command \
+#     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')); \
+#     choco feature disable --name showDownloadProgress
 
-RUN choco install make
+# RUN choco install make
+
+RUN @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" \
+        -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \
+        "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" \
+            && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+RUN choco install make -y
+
 
 RUN pip install pytest tox
 RUN pip install tox-globinterpreter

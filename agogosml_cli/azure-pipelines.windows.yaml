@@ -8,7 +8,7 @@ jobs:
 - job: windowsbuild
   displayName: Windows build on Python Image
   pool:
-    vmImage: win1803
+    vmImage: local-windows
 
 
   steps:

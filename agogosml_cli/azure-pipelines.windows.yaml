@@ -3,9 +3,12 @@ trigger:
     include:
     - matrix-build
 
+
 jobs:
 - job: windowsbuild
   displayName: Windows build on Python Image
+  pool:
+    vmImage: win1803
 
 
   steps:

@@ -20,8 +20,8 @@ COPY . .
 #     # make docs && \
 #     # make dist
 
-FROM python:${PYTHON_VERSION}
-ENV PYTHONUNBUFFERED=1
+#FROM python:${PYTHON_VERSION}
+#ENV PYTHONUNBUFFERED=1
 
 # COPY --from=builder /usr/src/agogosml_cli/dist /dist
 

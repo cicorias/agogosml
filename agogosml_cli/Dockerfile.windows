@@ -19,7 +19,9 @@ ENV chocolateyUseWindowsCompression false
 RUN powershell .\install.ps1 -Wait -ExecutionPolicy Bypass -NoProfile
 
 
-ENV PATH PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+ENV PATH %PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+
+RUN echo %PATH%
 
 # RUN @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" \
 #         -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \
